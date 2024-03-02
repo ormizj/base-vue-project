@@ -5,13 +5,13 @@
             <input v-else v-model="avatarUrl" :disabled="!isEditMode" :title="avatarUrl" />
         </td>
         <td>
-            <label :title="viewIndex">{{ viewIndex }}</label>
+            <div :title="viewIndex">{{ viewIndex }}</div>
         </td>
         <td>
             <input v-model="name" :disabled="!isEditMode" :title="name" />
         </td>
         <td>
-            <label :title="createdAt">{{ createdAt }}</label>
+            <time :title="createdAt">{{ createdAt }}</time>
         </td>
         <td>
             <button v-if="!isEditMode" @click="handleToggleEditMode" title="Update">
