@@ -13,5 +13,10 @@ module.exports = defineConfig({
       })
       return definitions
     })
+  },
+
+  // enable pre-compiled copy of code for debugging
+  configureWebpack: {
+    devtool: 'source-map'
   }
 })

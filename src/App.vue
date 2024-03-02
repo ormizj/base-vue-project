@@ -3,7 +3,6 @@
   <MainContent />
   <AppAside />
   <AppFooter />
-  {{ mockApi }}
 </template>
 
 <script>
@@ -14,19 +13,12 @@ import AppFooter from './components/AppFooter';
 
 export default {
   name: 'App',
-
   components: {
     AppHeader,
     MainContent,
     AppAside,
     AppFooter,
   },
-
-  data() {
-    return {
-      mockApi: process.env.VUE_APP_MOCK_API_SECRET,
-    }
-  }
 }
 </script>
 
@@ -37,6 +29,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: whitesmoke;
-  margin-top: 60px;
 }
 </style>

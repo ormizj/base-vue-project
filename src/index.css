@@ -1,3 +1,13 @@
 body {
   background-color: rgb(25, 25, 25);
 }
+
+input {
+  outline: none;
+  background-color: unset;
+  color: unset;
+  border: unset;
+  padding: unset;
+  padding-block: unset;
+  padding-inline: unset;
+}

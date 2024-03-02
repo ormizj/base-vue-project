@@ -1,9 +1,8 @@
 import axios from "axios";
-import { genErrorObj, genSuccessObj } from "./requestUtil";
+import { genSuccessObj, handleUnexpectedError } from "./requestUtil";
 
 const MOCK_API_SECRET = process.env.VUE_APP_MOCK_API_SECRET;
 const MOCK_API_URL = `https://${MOCK_API_SECRET}.mockapi.io/base/account`;
-console.log(MOCK_API_URL);
 
 export const getAllAccount = async () => {
     try {
@@ -11,8 +10,7 @@ export const getAllAccount = async () => {
         return genSuccessObj(res.status, res.data);
 
     } catch (err) {
-        console.error(err);
-        return genErrorObj(err.response.status, err.response.data);
+        return handleUnexpectedError();
     }
 }
 
@@ -22,8 +20,7 @@ export const getAccountById = async (id) => {
         return genSuccessObj(res.status, res.data);
 
     } catch (err) {
-        console.error(err);
-        return genErrorObj(err.response.status, err.response.data);
+        return handleUnexpectedError();
     }
 }
 
@@ -36,8 +33,7 @@ export const createAccount = async (name, avatarUrl) => {
         return genSuccessObj(res.status, res.data);
 
     } catch (err) {
-        console.error(err);
-        return genErrorObj(err.response.status, err.response.data);
+        return handleUnexpectedError();
     }
 }
 
@@ -50,8 +46,7 @@ export const updateAccount = async (id, name, avatarUrl) => {
         return genSuccessObj(res.status, res.data);
 
     } catch (err) {
-        console.error(err);
-        return genErrorObj(err.response.status, err.response.data);
+        return handleUnexpectedError();
     }
 }
 
@@ -61,7 +56,6 @@ export const deleteAccount = async (id) => {
         return genSuccessObj(res.status, res.data);
 
     } catch (err) {
-        console.error(err);
-        return genErrorObj(err.response.status, err.response.data);
+        return handleUnexpectedError();
     }
 }

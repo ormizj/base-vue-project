@@ -1,17 +1,20 @@
 <template>
     <main>
         <section>
-            Content
+            <AccountTable />
         </section>
     </main>
 </template>
 
 <script>
-import * as accountService from '@/api/accountService';
+import AccountTable from './Account/AccountTable'
 
 export default {
     name: 'MainContent',
+    components: {
+        AccountTable,
+    }
 }
 </script>
 
-<style></style>@/api/api
+<style scoped></style>
