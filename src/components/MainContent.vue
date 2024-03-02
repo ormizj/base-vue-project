@@ -7,13 +7,10 @@
 </template>
 
 <script>
-import * as Person from '@/utils/api';
+import * as person from '@/utils/api';
 
 export default {
     name: 'MainContent',
-    mounted() {
-        console.log(Person.getAllPerson());
-    }
 }
 </script>
 
