@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import AppHeader from './components/AppHeader';
-import MainContent from './components/MainContent';
-import AppAside from './components/AppAside';
-import AppFooter from './components/AppFooter';
+import AppHeader from './components/layout/AppHeader';
+import MainContent from './components/layout/MainContent';
+import AppAside from './components/layout/AppAside';
+import AppFooter from './components/layout/AppFooter';
 
 export default {
   name: 'App',

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import AccountTable from './Account/AccountTable'
+import AccountTable from '../Account/AccountTable'
 
 export default {
     name: 'MainContent',
