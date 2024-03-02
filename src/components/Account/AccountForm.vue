@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="handleSubmit" @reset.prevent="handleReset">
-        <label>Account Name</label><input v-model="name" />
-        <label>Avatar Url</label><input v-model="avatarUrl" />
+        <label title="Account Name">Account Name</label><input v-model="name" :title="name" />
+        <label title="Avatar Url">Avatar Url</label><input v-model="avatarUrl" :title="avatarUrl" />
         <button type="submit">Confirm</button>
         <button type="reset">Reset</button>
     </form>

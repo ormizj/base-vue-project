@@ -1,4 +1,7 @@
 <template>
+  <ConfirmModal />
+  <AlertModal />
+
   <AppHeader />
   <MainContent />
   <AppAside />
@@ -10,6 +13,8 @@ import AppHeader from './components/layout/AppHeader';
 import MainContent from './components/layout/MainContent';
 import AppAside from './components/layout/AppAside';
 import AppFooter from './components/layout/AppFooter';
+import AlertModal from './components/ui/Modal/AlertModal';
+import ConfirmModal from './components/ui/Modal/ConfirmModal';
 
 export default {
   name: 'App',
@@ -18,7 +23,10 @@ export default {
     MainContent,
     AppAside,
     AppFooter,
-  },
+
+    ConfirmModal,
+    AlertModal,
+  }
 }
 </script>
 
