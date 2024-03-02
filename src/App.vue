@@ -1,26 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <AppHeader />
+  <MainContent />
+  <AppAside />
+  <AppFooter />
+  {{ mockApi }}
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppHeader from './components/AppHeader';
+import MainContent from './components/MainContent';
+import AppAside from './components/AppAside';
+import AppFooter from './components/AppFooter';
 
 export default {
   name: 'App',
+
   components: {
-    HelloWorld
+    AppHeader,
+    MainContent,
+    AppAside,
+    AppFooter,
+  },
+
+  data() {
+    return {
+      mockApi: process.env.VUE_APP_MOCK_API_SECRET,
+    }
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: whitesmoke;
   margin-top: 60px;
 }
 </style>
