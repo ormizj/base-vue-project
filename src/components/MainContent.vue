@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import * as person from '@/utils/api';
+import * as accountService from '@/api/accountService';
 
 export default {
     name: 'MainContent',
 }
 </script>
 
-<style></style>
+<style></style>@/api/api
