@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import AccountRow from './AccountRow';
-import AccountForm from './AccountForm';
+import AccountRow from './AccountRow.vue';
+import AccountForm from './AccountForm.vue';
 import ConfirmModal from '../ui/Modal/ConfirmModal.vue';
 import AlertModal from '../ui/Modal/AlertModal.vue';
 import * as accountService from '../../api/accountService.js';
@@ -53,35 +53,33 @@ export default {
 
     methods: {
         async initAccounts() {
-            const res = await accountService.getAllAccount();
-            if (res.success) {
-                this.accounts = res.data;
+            try {
+                this.accounts = await accountService.getAllAccount();
 
-            } else {
-                this.openAlertUnexpectedError(res.data);
+            } catch (errMsg) {
+                this.openAlertUnexpectedError(errMsg);
             }
         },
 
         async handleAccountCreate(name, avatarUrl) {
-            const res = await accountService.createAccount(name, avatarUrl);
-            if (res.success) {
-                this.accounts.unshift(res.data);
+            try {
+                const account = await accountService.createAccount(name, avatarUrl);
+                this.accounts.unshift(account);
                 this.openAlertModal('Account Created Successfully');
 
-
-            } else {
-                this.openAlertUnexpectedError(res.data);
+            } catch (errMsg) {
+                this.openAlertUnexpectedError(errMsg);
             }
         },
 
         async handleAccountUpdate(id, name, avatarUrl, index) {
-            const res = await accountService.updateAccount(id, name, avatarUrl);
-            if (res.success) {
-                this.accounts[index] = res.data;
+            try {
+                const account = await accountService.updateAccount(id, name, avatarUrl);
+                this.accounts[index] = account;
                 this.openAlertModal('Account Updated Successfully');
 
-            } else {
-                this.openAlertUnexpectedError(res.data);
+            } catch (errMsg) {
+                this.openAlertUnexpectedError(errMsg);
             }
         },
 
@@ -90,13 +88,13 @@ export default {
                 this.closeModals();
                 if (!isConfirm) return;
 
-                const res = await accountService.deleteAccount(id);
-                if (res.success) {
+                try {
+                    await accountService.deleteAccount(id);
                     removeIndex(this.accounts, index);
                     this.openAlertModal('Account Deleted Successfully');
 
-                } else {
-                    this.openAlertUnexpectedError(res.data);
+                } catch (errMsg) {
+                    this.openAlertUnexpectedError(errMsg);
                 }
             });
         },
@@ -118,7 +116,7 @@ export default {
         },
 
         openAlertUnexpectedError(errMsg) {
-            this.openAlertModal(false, `Unexpected error has occurred: ${errMsg}`);
+            this.openAlertModal(`Unexpected error has occurred: ${errMsg}`, false);
         },
 
         closeModals() {
