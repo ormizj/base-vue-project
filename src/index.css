@@ -1,5 +1,10 @@
 body {
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
   background-color: rgb(25, 25, 25);
+  color: white;
 }
 
 input {
@@ -10,4 +15,9 @@ input {
   padding: unset;
   padding-block: unset;
   padding-inline: unset;
+}
+
+input:not([disabled]) {
+  background-color: white;
+  color: black;
 }

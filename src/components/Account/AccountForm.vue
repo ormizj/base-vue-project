@@ -4,6 +4,7 @@
         <label title="Avatar Url">Avatar Url</label><input v-model="avatarUrl" :title="avatarUrl" />
         <button type="submit">Confirm</button>
         <button type="reset">Reset</button>
+        <button type="button" @click="handleRandom">Randomize</button>
     </form>
 </template>
 
@@ -34,6 +35,10 @@ export default {
         resetForm() {
             this.name = '';
             this.avatarUrl = '';
+        },
+
+        handleRandom() {
+            this.onAccountCreate();
         },
     }
 }

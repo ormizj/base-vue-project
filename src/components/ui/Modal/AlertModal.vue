@@ -1,6 +1,6 @@
 <template>
-    <BaseModal>
-        <div>ALERT MODAL</div>
+    <BaseModal :isOpen="isOpen" :message="message">
+        <button @click="handleConfirm">Confirm</button>
     </BaseModal>
 </template>
 
@@ -13,8 +13,16 @@ export default {
         BaseModal,
     },
     props: {
-        isSuccessful: Boolean,
         message: String,
+        isOpen: Boolean,
+        modalCb: Function,
+        isSuccessful: Boolean,
+    },
+
+    methods: {
+        handleConfirm() {
+            this.modalCb();
+        }
     }
 }
 </script>

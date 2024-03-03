@@ -1,4 +1,8 @@
 <template>
+    <ConfirmModal :isOpen="isConfirmModalOpen" :message="modalMessage" :modalCb="modalCb" />
+    <AlertModal :isOpen="isAlertModalOpen" :message="modalMessage" :modalCb="modalCb"
+        :isSuccessful="isAlertModalSuccess" />
+
     <AccountForm :onAccountCreate="handleAccountCreate" />
     <table>
         <tr>
@@ -17,6 +21,8 @@
 <script>
 import AccountRow from './AccountRow';
 import AccountForm from './AccountForm';
+import ConfirmModal from '../ui/Modal/ConfirmModal.vue';
+import AlertModal from '../ui/Modal/AlertModal.vue';
 import * as accountService from '../../api/accountService.js';
 import { removeIndex } from '../../utils/arrayUtil.js';
 
@@ -25,11 +31,18 @@ export default {
     components: {
         AccountRow,
         AccountForm,
+        ConfirmModal,
+        AlertModal,
     },
 
     data() {
         return {
             accounts: [],
+            isConfirmModalOpen: false,
+            isAlertModalOpen: false,
+            isAlertModalSuccess: false,
+            modalMessage: '',
+            modalCb: null,
         }
     },
 
@@ -44,20 +57,19 @@ export default {
                 this.accounts = res.data;
 
             } else {
-                //TODO modal error
+                this.openAlertUnexpectedError(res.data);
             }
         },
 
         async handleAccountCreate(name, avatarUrl) {
             const res = await accountService.createAccount(name, avatarUrl);
-
             if (res.success) {
                 this.accounts.unshift(res.data);
-                // TODO success modal
+                this.openAlertModal('Account Created Successfully');
 
 
             } else {
-                //TODO modal error
+                this.openAlertUnexpectedError(res.data);
             }
         },
 
@@ -65,34 +77,56 @@ export default {
             const res = await accountService.updateAccount(id, name, avatarUrl);
             if (res.success) {
                 this.accounts[index] = res.data;
-                // TODO success modal
-
+                this.openAlertModal('Account Updated Successfully');
 
             } else {
-                //TODO modal error
+                this.openAlertUnexpectedError(res.data);
             }
         },
 
         async handleAccountDelete(id, index) {
-            const res = await accountService.deleteAccount(id);
-            //TODO confirm modal
+            this.openConfirmModal('Are you sure you want to delete this account?', async (isConfirm) => {
+                this.closeModals();
+                if (!isConfirm) return;
 
-            if (res.success) {
-                removeIndex(this.accounts, index);
-                // TODO success modal
+                const res = await accountService.deleteAccount(id);
+                if (res.success) {
+                    removeIndex(this.accounts, index);
+                    this.openAlertModal('Account Deleted Successfully');
 
-            } else {
-                //TODO modal error
-            }
+                } else {
+                    this.openAlertUnexpectedError(res.data);
+                }
+            });
         },
+
+        openConfirmModal(message, modalCb) {
+            this.isConfirmModalOpen = true;
+            this.openModalHelper(message, modalCb);
+        },
+
+        openAlertModal(message, isSuccess = true, modalCb) {
+            this.isAlertModalSuccess = isSuccess;
+            this.isAlertModalOpen = true;
+            this.openModalHelper(message, modalCb);
+        },
+
+        openModalHelper(message, modalCb = this.closeModals) {
+            this.modalMessage = message;
+            this.modalCb = modalCb;
+        },
+
+        openAlertUnexpectedError(errMsg) {
+            this.openAlertModal(false, `Unexpected error has occurred: ${errMsg}`);
+        },
+
+        closeModals() {
+            this.isConfirmModalOpen = false;
+            this.isAlertModalOpen = false;
+        }
     }
 
 }
 </script>
 
-<style>
-input:not([disabled]) {
-    background-color: whitesmoke;
-    color: black;
-}
-</style>
+<style></style>
