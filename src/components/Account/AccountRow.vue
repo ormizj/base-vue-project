@@ -66,13 +66,13 @@ export default {
             this.handleToggleEditMode();
             this.avatarUrl = this.account.avatarUrl;
             this.name = this.account.name;
-        }
+        },
     },
 
     computed: {
         viewIndex() {
             return this.index + 1;
-        }
+        },
     }
 }
 </script>

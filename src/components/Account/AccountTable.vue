@@ -4,6 +4,7 @@
         :isSuccessful="isAlertModalSuccess" />
 
     <AccountForm :onAccountCreate="handleAccountCreate" />
+
     <table>
         <tr>
             <th title="Avatar">Avatar</th>
@@ -47,11 +48,11 @@ export default {
     },
 
     created() {
-        this.initializeAccounts();
+        this.initAccounts();
     },
 
     methods: {
-        async initializeAccounts() {
+        async initAccounts() {
             const res = await accountService.getAllAccount();
             if (res.success) {
                 this.accounts = res.data;
@@ -125,7 +126,6 @@ export default {
             this.isAlertModalOpen = false;
         }
     }
-
 }
 </script>
 

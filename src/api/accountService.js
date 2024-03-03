@@ -10,7 +10,7 @@ export const getAllAccount = async () => {
         return genSuccessObj(res.status, res.data);
 
     } catch (err) {
-        return handleUnexpectedError();
+        return handleUnexpectedError(err);
     }
 }
 
@@ -20,7 +20,7 @@ export const getAccountById = async (id) => {
         return genSuccessObj(res.status, res.data);
 
     } catch (err) {
-        return handleUnexpectedError();
+        return handleUnexpectedError(err);
     }
 }
 
@@ -33,7 +33,7 @@ export const createAccount = async (name, avatarUrl) => {
         return genSuccessObj(res.status, res.data);
 
     } catch (err) {
-        return handleUnexpectedError();
+        return handleUnexpectedError(err);
     }
 }
 
@@ -46,7 +46,7 @@ export const updateAccount = async (id, name, avatarUrl) => {
         return genSuccessObj(res.status, res.data);
 
     } catch (err) {
-        return handleUnexpectedError();
+        return handleUnexpectedError(err);
     }
 }
 
@@ -56,6 +56,6 @@ export const deleteAccount = async (id) => {
         return genSuccessObj(res.status, res.data);
 
     } catch (err) {
-        return handleUnexpectedError();
+        return handleUnexpectedError(err);
     }
 }
